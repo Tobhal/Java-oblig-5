@@ -1,0 +1,8 @@
+name,mass,radius,semiMajorAxis,eccentricity,orbitalPeriod,centralCelestialBody,type,effectiveTemp,pictureUrl
+Kepler-11,1.889E30,710310,,,,,sun,5680,https://upload.wikimedia.org/wikipedia/commons/6/64/Kepler11.png
+Kepler-11b,2.56796E25,12550,1.36134E7,0.045,10,Kepler-11,planet
+Kepler-11c,8.0622E25,20068,1.5857E7,0.026,13,Kepler-11,planet
+Kepler-11d,3.64292E25,21852,2.3786E7,0.004,22,Kepler-11,planet
+Kepler-11e,5.01648E25,28796,2.9021E7,0.012,31,Kepler-11,planet
+Kepler-11f,1.37356E25,16628,3.7399E7,0.013,36,Kepler-11,planet
+Kepler-11g,1.7916E27,23317,6.9114E7,0.015,118,Kepler-11,planet

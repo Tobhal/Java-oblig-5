@@ -1,0 +1,11 @@
+name,mass,radius,semiMajorAxis,eccentricity,orbitalPeriod,centralCelestialBody,type,effectiveTemp
+Sun,1.9885E30,695342,,,,,sun,5777
+Mercury,3.283E23,2439.7,0.387,0.206,88,Sun,planet,
+Venus,4.867E24,6051.8,0.723,0.007,225,Sun,planet,
+Earth,5.972E24,6371,1,0.017,365,Sun,planet,
+Mars,6.39E23,3389.5,1.524,0.093,687,Sun,planet,
+Jupiter,1.898E27,69911,5.20440,0.049,4380,Sun,planet,
+Saturn,5.683E26,58232,9.5826,0.057,10585,Sun,planet,
+Uranus,8.681E25,25362,19.2184,0.046,30660,Sun,planet,
+Neptune,1.024E26,24622,30.11,0.010,60225,Sun,planet,
+Pluto,1.303E22,1186.0,39.3,0.006,90560,Sun,planet,
