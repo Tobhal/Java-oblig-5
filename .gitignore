@@ -1,0 +1,13 @@
+# Project exclude paths
+/out/
+/.idea/
+src/main/java/.DS_Store
+src/main/resources/vue/.DS_Store
+src/main/resources/vue/views/.DS_Store
+src/main/resources/.DS_Store
+src/main/java/model/com/company/.DS_Store
+src/main/java/com/company/.DS_Store
+src/main/java/com/company/model/.DS_Store
+Oblig-3.iml# Java-oblig-4
+build/
+.gradle/
