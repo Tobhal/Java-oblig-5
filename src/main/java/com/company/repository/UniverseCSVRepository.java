@@ -4,12 +4,9 @@ import com.company.model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public class UniverseCSVRepository {
+public class UniverseCSVRepository implements IUniverseCSVRepository {
     public HashMap<Integer, PlanetSystem> planetSystems = new HashMap<>();
 
     public UniverseCSVRepository(String fileName) {
@@ -163,6 +160,13 @@ public class UniverseCSVRepository {
             return aktuellPlanetSystem.getPlanet(planetId).getMoon(moonId);
 
         return null;
+    }
+
+    @Override
+    public void sort(PlanetSystem.Sort sort) {
+        for (int i : planetSystems.keySet()) {
+            planetSystems.get(i).sortPlanet(sort);
+        }
     }
 }
 

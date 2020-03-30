@@ -7,7 +7,7 @@ import com.company.model.ReadFile;
 
 import java.util.ArrayList;
 
-public class UniverseJSONRepository {
+public class UniverseJSONRepository implements IUniverseJSONRepository {
     public ArrayList<PlanetSystem> planetSystems = new ArrayList<>();
 
     public UniverseJSONRepository(String fileName) {
@@ -105,5 +105,11 @@ public class UniverseJSONRepository {
             return aktuellPlanetSystem.getPlanet(planetId).getMoon(moonId);
 
         return null;
+    }
+
+    public void sort(PlanetSystem.Sort sort) {
+        for (PlanetSystem planetSystem : planetSystems) {
+            planetSystem.sortPlanet(sort);
+        }
     }
 }

@@ -6,7 +6,6 @@ public class CenterStar extends CelestialBody{
     private double effectiveTemp;
 
     public CenterStar() {
-
     }
     public CenterStar(String name) {
         super(name);
