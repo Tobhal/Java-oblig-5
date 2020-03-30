@@ -5,19 +5,19 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ReadFile {
-    static String planetSavePath = "CSV-files";
-    static String planetSaveExtension = ".csv";
+    static String CSVFilePath = "CSV-files";
+    static String CSVFileExtetnion = ".csv";
     static String planetCSVDevider = ",";
     static boolean emtySystem = false;
 
     public static void readFile_V1_5(PlanetSystem planetSystem, String systemCSV) {
-        planetSavePath = "CSV-files/" + systemCSV;
-        planetSaveExtension = ".csv";
+        CSVFilePath = "CSV-files/" + systemCSV;
+        CSVFileExtetnion = ".csv";
         int typePlace = 0;
         int namePlace = 0;
         int centralCelestialBodyPlace = 0;
 
-        try (Scanner fileScanner = new Scanner(new File(planetSavePath + planetSaveExtension))) {   // Putting the scanner in the try so that is closes when the try catch ends
+        try (Scanner fileScanner = new Scanner(new File(CSVFilePath + CSVFileExtetnion))) {   // Putting the scanner in the try so that is closes when the try catch ends
             String[] splitFileString = fileScanner.next().split(planetCSVDevider);
 
             for (int i = 0; i < splitFileString.length; i++) {  // Here to save where information i am going to use later
@@ -128,9 +128,13 @@ public class ReadFile {
             planetSystem.printPlanetList();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Eksisterer " + planetSavePath + planetSaveExtension + " ?");   // If the file does not exist this will be printet
+            System.out.println("Eksisterer " + CSVFilePath + CSVFileExtetnion + " ?");   // If the file does not exist this will be printet
             System.out.println(e.toString());   // -------------------------------------
         }
+    }
+
+    public static void readCSV(PlanetSystem planetSystem) {
+
     }
 
     public static void readAllMoonsCSV(PlanetSystem planetSystem) {
@@ -158,7 +162,7 @@ public class ReadFile {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Eksisterer " + planetSavePath + planetSaveExtension + " ?");   // If the file does not exist this will be printet
+            System.out.println("Eksisterer " + CSVFilePath + CSVFileExtetnion + " ?");   // If the file does not exist this will be printet
             System.out.println(e.toString());   // -------------------------------------
         }
     }

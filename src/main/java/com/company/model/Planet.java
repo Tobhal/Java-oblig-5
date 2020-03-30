@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Planet extends NaturalSatellite {
-    // private int index;
-
     public Planet() {
-        // index = count;
     }
     Planet(String name) {
         super(name);
@@ -63,9 +60,6 @@ public class Planet extends NaturalSatellite {
     }   // This is a list so i can use it in a for each loop
     public ArrayList moonArray() {
         return moons;
-    }
-    public int getIndex() {
-        return index;
     }
 
     public Boolean hasMoon(String name) {

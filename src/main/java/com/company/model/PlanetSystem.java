@@ -1,6 +1,5 @@
 package com.company.model;
 
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -54,77 +53,6 @@ public class PlanetSystem{
     // Add
     public void addPlanetToSystem(Planet planet) {
         planetList.add(planet);
-    }
-
-    public void createBody(Body body) {
-        switch (body) {
-            case STAR:
-                createCenterStar();
-                break;
-            case PLANET:
-                createPlanet();
-                break;
-            case MOON:
-                createSatellite();
-                break;
-        }
-    }
-    public void createCenterStar() {
-        System.out.print("Write the name of the Center Star");
-        UserInput input1 = new UserInput();
-
-        System.out.print("Write the mass of the Center Star");
-        UserInput input2 = new UserInput();
-
-        System.out.print("Write the radius of the Center Star");
-        UserInput input3 = new UserInput();
-
-        System.out.print("Write the efective temprature of the Center Star");
-        UserInput input4 = new UserInput();
-
-        centerStar = new CenterStar(input1.getString(), input2.getDouble(), input3.getDouble(), input4.getDouble());
-    }
-    public void createPlanet() {        // Function to add planets.
-        System.out.println("Type the name of the planet:");
-        Planet planet = new Planet(new UserInput().getString());
-        planetSystemList.get(whatSystem).addPlanetToSystem(planet);
-
-        while (running) {
-            System.out.println("What prop do you want to create?");
-            System.out.println("1: Mass, 2: Radius, 3: Semi Major Axis, 4. Eccectricity, 5 Orbital Peorid, 6 Central Celestial Body");
-            System.out.println("9 to exit");
-            /*
-            switch (new UserInput().getString()) {
-                case "1":
-                    planetSystemList.get(whatSystem).getPlanet(planet.name).setBodyPropByName("mass", sc.next());
-                    break;
-                case "2":
-                    planetSystemList.get(whatSystem).getPlanet(planet.name).setBodyPropByName("radius", sc.next());
-                    break;
-                case "3":
-                    planetSystemList.get(whatSystem).getPlanet(planet.name).setBodyPropByName("semiMajorAxis", sc.next());
-                    break;
-                case "4":
-                    planetSystemList.get(whatSystem).getPlanet(planet.name).setBodyPropByName("eccentricity", sc.next());
-                    break;
-                case "5":
-                    planetSystemList.get(whatSystem).getPlanet(planet.name).setBodyPropByName("orbitalPeriod", sc.next());
-                    break;
-                case "6":
-                    planetSystemList.get(whatSystem).getPlanet(planet.name).setBodyPropByName("centralCelestialBody", sc.next());
-                    break;
-                case "9":
-                    running = false;
-                    break;
-                default:
-                    System.out.println("That is not a valdi command");
-                    break;
-            }
-             */
-        }
-    }
-    public void createSatellite() {
-
     }
 
     // Sett
@@ -210,12 +138,12 @@ public class PlanetSystem{
                 }
                 return false;
             case MOON:
-                for (int i = 0; i < planetSystemList.get(whatSystem).getPlanet(centralBody).numberOfMoons(); i++) {
+               /* for (int i = 0; i < planetSystemList.get(whatSystem).getPlanet(centralBody).numberOfMoons(); i++) {
                     if (planetSystemList.get(whatSystem).getPlanet(centralBody).getMoon(i).getName().equals(name)) {
                         return true;
                     }
                 }
-                return false;
+               */ return false;
         }
         return false;
     }
@@ -233,10 +161,9 @@ public class PlanetSystem{
                 planetList.sort((planet1, planet2) -> (int)(planet1.getRadius() - planet2.getRadius()));
                 break;
             case NUMBER:
-                planetList.sort(Comparator.comparingInt(CelestialBody::getIndex));
+                planetList.sort((planet1, planet2) -> (int)(planet1.getSemiMajorAxis() - planet2.getSemiMajorAxis()));  //Removed index to try to use semiMajorAxis insted...
                 break;
         }
-
     }
 
     // Print

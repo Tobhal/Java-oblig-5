@@ -1,9 +1,5 @@
 package com.company.model;
 
-import static com.company.Main.planetSystemList;
-import static com.company.Main.whatSystem;
-//import static com.company.Planet.moons;
-
 public abstract class NaturalSatellite extends CelestialBody {
     protected double semiMajorAxis;
     protected double eccentricity;
@@ -37,11 +33,13 @@ public abstract class NaturalSatellite extends CelestialBody {
     }
     NaturalSatellite(String name, double mass, double radius, double semiMajorAxis, double eccentricity, double orbitalPeriod, String centralCelestialBody) {
         super(name, mass, radius, semiMajorAxis, eccentricity, orbitalPeriod);
+        /*
         if (planetSystemList.get(whatSystem).bodyExists(centralCelestialBody, PlanetSystem.Body.STAR)) {
             this.centralCelestialBody = planetSystemList.get(whatSystem).getCenterStar();
         } else if (planetSystemList.get(whatSystem).bodyExists(centralCelestialBody, PlanetSystem.Body.PLANET)) {
             this.centralCelestialBody = planetSystemList.get(whatSystem).getPlanet(centralCelestialBody);
         }
+         */
     }
 
     public enum UnitType {
@@ -67,33 +65,34 @@ public abstract class NaturalSatellite extends CelestialBody {
     }
 
     public void setBodyPropByName(String prop, String value, PlanetSystem planetSystem) {
-        switch (prop) {
+        switch (prop.toLowerCase()) {
             case "name":
-            case "Name":
+            case "pl_name":
                 this.name = new UserInput(value).getString();
                 break;
             case "mass":
-            case "Mass":
+            case "pl_mass":
                 this.mass = new UserInput(value).getDouble();
                 break;
             case "radius":
-            case "Radius":
+            case "pl_radius":
                 this.radius = new UserInput(value).getDouble();
                 break;
             case "semiMajorAxis":
-            case "Semi MajorAxis":
+            case "semi major axis":
+            case "pl_semimajor":
                 this.semiMajorAxis = new UserInput(value).getDouble();
                 break;
             case "eccentricity":
-            case "Eccentricity":
+            case "pl_ecc":
                 this.eccentricity = new UserInput(value).getDouble();
                 break;
             case "orbitalPeriod":
-            case "Orbital Period":
+            case "pl_orbper":
                 this.orbitalPeriod = new UserInput(value).getDouble();
                 break;
             case "centralCelestialBody":
-            case "Central Celestial Body":
+            case "st_name":
                 if (planetSystem.getCenterStar().getName().equals(value)) {
                     this.centralCelestialBody = planetSystem.getCenterStar();
                     break;
@@ -104,10 +103,12 @@ public abstract class NaturalSatellite extends CelestialBody {
 
                 System.out.println("Did not find " + value + " as a central body.");
                 break;
-            case "pictureUrl":
+            case "pictureurl":
+            case "pl_pictureurl":
                 this.pictureUrl = new UserInput(value).getString();
                 break;
             default:
+                System.out.println(prop + "is no property of planet");
                 break;
         }
     }

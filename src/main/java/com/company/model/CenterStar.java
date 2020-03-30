@@ -2,21 +2,19 @@ package com.company.model;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.company.Main.planetSystemList;
-
 public class CenterStar extends CelestialBody{
     private double effectiveTemp;
 
     public CenterStar() {
 
     }
-    CenterStar(String name) {
+    public CenterStar(String name) {
         super(name);
     }
-    CenterStar(String name, double mass) {
+    public CenterStar(String name, double mass) {
         super(name, mass);
     }
-    CenterStar(String name, double mass, double radius) {
+    public CenterStar(String name, double mass, double radius) {
         super(name, mass, radius);
     }
     public CenterStar(String name, double mass, double radius, double effectiveTemp) {
@@ -39,33 +37,34 @@ public class CenterStar extends CelestialBody{
     }
 
     public void setSunPropByName(String prop, String value, PlanetSystem planetSystem) {
-        switch (prop) {
+        switch (prop.toLowerCase()) {
             case "name":
-            case "Name":
+            case "st_name":
                 this.name = new UserInput(value).getString();
                 break;
             case "mass":
-            case "Mass":
+            case "st_mass":
                 this.mass = new UserInput(value).getDouble();
                 break;
             case "radius":
-            case "Radius":
+            case "st_radius":
                 this.radius = new UserInput(value).getDouble();
                 break;
-            case "EffectiveTemp":
-            case "effectiveTemp":
-            case "Effective_Temp":
-            case "effective_Temp":
+            case "effectivetemp":
+            case "effective_temp":
+            case "st_efftemp":
                 this.effectiveTemp = new UserInput(value).getDouble();
                 break;
-            case "Sun":
             case "sun":
+            //case "#_psys_name":
                 planetSystem.setCenterStar(this);
                 break;
-            case "pictureUrl":
+            case "pictureurl":
+            case "st_pictureurl":
                 this.pictureUrl = new UserInput(value).getString();
                 break;
             default:
+                System.out.println(prop + "is no property of sun");
                 break;
         }
     }

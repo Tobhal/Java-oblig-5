@@ -1,16 +1,11 @@
 package com.company.model;
 
-import static com.company.Main.sc;              // imports sc (input scanner) from main so i can use it here
-import static com.company.Main.listCommands;    // imports the listCommand function from main
-import static com.company.Main.running;         // imports the running boolean from main, so i can exit the program
-import static com.company.Main.clearConsoll;    // imports the clear console function from main
-
 public class UserInput {
     private String userInput;
 
     // Declaration
     public UserInput() {       // This is here so i do not need to define a input
-        this.userInput = sc.next();      // Gets sc (scanner) from main
+        //this.userInput = sc.next();      // Gets sc (scanner) from main
         isInputCommand(userInput);
     }
     public UserInput(String input) {
@@ -27,14 +22,14 @@ public class UserInput {
         if (ch[0] == '/') {     // Test if the first character in the stirng is a / if not the do nothing
             switch (userInput) {
                 case "/exit":
-                    running = false;
+                    //running = false;
                     break;
                 case "/commands":
                 case "/help":
-                    listCommands();
+                    //listCommands();
                     break;
                 case "/clear":
-                    clearConsoll();
+                    //clearConsoll();
                     break;
                 case "/give up":
                 case "/help!":
