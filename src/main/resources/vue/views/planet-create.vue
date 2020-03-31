@@ -1,7 +1,7 @@
 <template id="planet-create" @planet-submitted="createPlanet">
     <div class="form-style">
         <h2>Create new planet in the {{planetSystemName}}</h2>
-        <form class="create" @submit="checkForm" :action=`/api/planet-systems/${planetSystemName}/createplanet` method="post">
+        <form class="create" @submit="checkForm" :action=`/api/planet-systems/${planetSystemName}/createPlanet` method="post">
             <div v-if="errors.length">
                 <b>Please correct the following error(s):</b>
                 <ul>

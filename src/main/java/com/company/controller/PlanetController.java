@@ -61,7 +61,37 @@ public class PlanetController {
         universeRepository.deletePlanet(systemName, planetName);
     }
     public void createPlanet(Context context) {
+        System.out.println("Start create planet");
+
         String systemName = context.pathParam("planet-system-id");
+
+        System.out.println("create planet variables");
+
+        String name = context.formParam("name");
+        double mass = Double.parseDouble(context.formParam("mass"));
+        double radius = Double.parseDouble(context.formParam("radius"));
+        double semiMajorAxis = Double.parseDouble(context.formParam("semiMajorAxis"));
+        double eccentricity = Double.parseDouble(context.formParam("eccentricity"));
+        double orbitalPeroid = Double.parseDouble(context.formParam("orbitalPeriod"));
+        String pictureUrl = context.formParam("pichureUrl");
+
+        System.out.println("Create planet object");
+
+        Planet planet = new Planet(name, mass, radius, semiMajorAxis, eccentricity, orbitalPeroid);
+        planet.setPictureUrl(pictureUrl);
+        planet.setCentralCelestialBody(universeRepository.getPlanet(systemName, name).getCentralCelestialBody());
+
+        System.out.println("Add planet to unicersRepository");
+
+        universeRepository.createPlanet(systemName, planet);
+
+        System.out.println("Redirect");
+
+        context.redirect("/planet-systems/" + systemName + "/planets" + name);
+    }
+    public void updatePlanet(Context context) {
+        String systemName = context.pathParam("planet-system-id");
+        String planetName = context.pathParam("planetName");
 
         String name = context.formParam("name");
         double mass = Double.parseDouble(context.formParam("mass"));
@@ -75,7 +105,7 @@ public class PlanetController {
         planet.setPictureUrl(pictureUrl);
         planet.setCentralCelestialBody(universeRepository.getPlanet(systemName, name).getCentralCelestialBody());
 
-        universeRepository.createPlanet(systemName, planet);
+        universeRepository.updatePlanet(systemName, planetName, planet);
 
         context.redirect("/planet-systems/" + systemName + "/planets" + name);
     }

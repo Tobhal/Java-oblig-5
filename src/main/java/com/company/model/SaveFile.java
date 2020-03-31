@@ -4,11 +4,13 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class SaveFile {
     static String planetSavePath = "CSV-files/solar_system_planets";
@@ -58,19 +60,9 @@ public class SaveFile {
         }
     }
 
-    public static void saveFile(HashMap<Integer, PlanetSystem> planetSystems) throws IOException {
-        try (FileWriter fileWriter = new FileWriter(new File("Planets_Saved.csv"))) {
-            fileWriter.write("#_psys_name,psys_pichureurl,st_name,st_mass,st_radius,st_efftemp,st_pictureurl,pl_name,pl_mass,pl_semimajor,pl_ecc,pl_orbper,pl_pictureurl");  // Adds the headers
-
-            for (int i : planetSystems.keySet()) {
-                //todo: implementere denne filskriveren
-            }
-        }
-    }
-
     public static void saveFileJason(List<PlanetSystem> planetSystems) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-        writer.writeValue(new File("planetSystem.json"), planetSystems);
+        writer.writeValue(new File("json-files/planetSystem_saved.json"), planetSystems);
     }
 }

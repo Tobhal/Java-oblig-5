@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //UniverseCSVRepository universeCSVRepository = new UniverseCSVRepository("planets");
         UniverseJSONRepository universeJSONRepository = new UniverseJSONRepository("planets");
+        universeJSONRepository.save();
     }
 }
 

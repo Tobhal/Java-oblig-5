@@ -147,7 +147,11 @@ public class UniverseJSONRepository implements IUniverseRepository {
     @Override
     public void save() {
         Thread thread = new Thread( () -> {
-            SaveFile.saveFile(getAllPlanetSystem());
+            try {
+                SaveFile.saveFileJason(getAllPlanetSystem());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         thread.start();
     }
