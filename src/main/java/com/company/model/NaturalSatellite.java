@@ -108,7 +108,6 @@ public abstract class NaturalSatellite extends CelestialBody {
                 this.pictureUrl = new UserInput(value).getString();
                 break;
             default:
-                System.out.println(prop + "is no property of planet");
                 break;
         }
     }

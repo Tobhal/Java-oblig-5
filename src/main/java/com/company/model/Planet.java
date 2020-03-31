@@ -23,7 +23,7 @@ public class Planet extends NaturalSatellite {
     Planet(String name, double mass, double radius, double semiMajorAxis, double eccentricity) {
         super(name, mass, radius, semiMajorAxis, eccentricity);
     }
-    Planet(String name, double mass, double radius, double semiMajorAxis, double eccentricity, double orbitalPeriod) {
+    public Planet(String name, double mass, double radius, double semiMajorAxis, double eccentricity, double orbitalPeriod) {
         super(name, mass, radius, semiMajorAxis, eccentricity, orbitalPeriod);
     }
     Planet(String name, double mass, double radius, double semiMajorAxis, double eccentricity, double orbitalPeriod, CelestialBody centralCelestialBody) {
@@ -76,6 +76,16 @@ public class Planet extends NaturalSatellite {
 
     public void addMoon(Moon moon) {
         moons.add(moon);
+    }
+
+    public void setPropFromOtherPlanet(Planet otherPlanet) {
+        setName(otherPlanet.getName());
+        setMass(otherPlanet.getMass());
+        setRadius(otherPlanet.getRadius());
+        setSemiMajorAxis(otherPlanet.getSemiMajorAxis());
+        setEccentricity(otherPlanet.getEccentricity());
+        setOrbitalPeriod(otherPlanet.getOrbitalPeriod());
+        setCentralCelestialBody(otherPlanet.getCentralCelestialBody());
     }
 
     public void printPlanet() {   // Prints all of the plannets that is stored

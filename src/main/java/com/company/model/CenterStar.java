@@ -63,7 +63,6 @@ public class CenterStar extends CelestialBody{
                 this.pictureUrl = new UserInput(value).getString();
                 break;
             default:
-                System.out.println(prop + "is no property of sun");
                 break;
         }
     }

@@ -1,9 +1,12 @@
 package com.company.controller;
 
+import com.company.model.CelestialBody;
+import com.company.model.CenterStar;
 import com.company.model.PlanetSystem;
 import io.javalin.http.Context;
 import com.company.model.Planet;
 import com.company.repository.IUniverseRepository;
+import org.jetbrains.annotations.NotNull;
 
 public class PlanetController {
     private IUniverseRepository universeRepository;
@@ -49,6 +52,32 @@ public class PlanetController {
         String moonName = context.pathParam("moonName");
 
         context.json(universeRepository.getMoon(systemName, planetName, moonName));
+    }
+
+    public void deletePlanet(Context context) {
+        String systemName = context.pathParam("planet-system-id");
+        String planetName = context.pathParam("planetName");
+
+        universeRepository.deletePlanet(systemName, planetName);
+    }
+    public void createPlanet(Context context) {
+        String systemName = context.pathParam("planet-system-id");
+
+        String name = context.formParam("name");
+        double mass = Double.parseDouble(context.formParam("mass"));
+        double radius = Double.parseDouble(context.formParam("radius"));
+        double semiMajorAxis = Double.parseDouble(context.formParam("semiMajorAxis"));
+        double eccentricity = Double.parseDouble(context.formParam("eccentricity"));
+        double orbitalPeroid = Double.parseDouble(context.formParam("orbitalPeriod"));
+        String pictureUrl = context.formParam("pichureUrl");
+
+        Planet planet = new Planet(name, mass, radius, semiMajorAxis, eccentricity, orbitalPeroid);
+        planet.setPictureUrl(pictureUrl);
+        planet.setCentralCelestialBody(universeRepository.getPlanet(systemName, name).getCentralCelestialBody());
+
+        universeRepository.createPlanet(systemName, planet);
+
+        context.redirect("/planet-systems/" + systemName + "/planets" + name);
     }
 
     private void sortPlanetSystem(Context context) {

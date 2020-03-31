@@ -1,20 +1,33 @@
 package com.company.repository;
 
-import com.company.model.Moon;
-import com.company.model.Planet;
-import com.company.model.PlanetSystem;
-import com.company.model.ReadFile;
+import com.company.model.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class UniverseJSONRepository implements IUniverseJSONRepository {
+public class UniverseJSONRepository implements IUniverseRepository {
     public ArrayList<PlanetSystem> planetSystems = new ArrayList<>();
 
-    public UniverseJSONRepository(String fileName) {
-        // Read JSON file here
+    public UniverseJSONRepository(String fileName) throws IOException {
+        if (!fileName.matches(".+\\.csv"))  //Checks if there is .csv in the file name. if not then add.
+            fileName += ".json";
+        fileName = "json-files/" + fileName;
+
+        File file = new File(fileName);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        PlanetSystem[] planetSystemArray = new PlanetSystem[0];
+
+        planetSystemArray = mapper.readValue(file, PlanetSystem[].class);
+
+        planetSystems.addAll(Arrays.asList(planetSystemArray));
     }
 
-    public void inportJSONAgain(String fileName) {
+    public void inportJSON(String fileName) {
 
     }
 
@@ -105,6 +118,38 @@ public class UniverseJSONRepository implements IUniverseJSONRepository {
             return aktuellPlanetSystem.getPlanet(planetId).getMoon(moonId);
 
         return null;
+    }
+
+    @Override
+    public void createPlanet(String systemName, Planet newPlanet) {
+        for (PlanetSystem planetSystem : planetSystems)
+            if (planetSystem.getName().equalsIgnoreCase(systemName))
+                planetSystem.addPlanetToSystem(newPlanet);
+        save();
+    }
+
+    @Override
+    public void updatePlanet(String systemName, String planetName, Planet newPlanet) {
+        for (PlanetSystem planetSystem : planetSystems)
+            if (planetSystem.getName().equalsIgnoreCase(systemName))
+                planetSystem.getPlanet(planetName).setPropFromOtherPlanet(newPlanet);
+        save();
+    }
+
+    @Override
+    public void deletePlanet(String systemName, String planetName) {
+        for (PlanetSystem planetSystem : planetSystems)
+            if (planetSystem.getName().equalsIgnoreCase(systemName))
+                planetSystem.removePlanetFromSystem(planetName);
+        save();
+    }
+
+    @Override
+    public void save() {
+        Thread thread = new Thread( () -> {
+            SaveFile.saveFile(getAllPlanetSystem());
+        });
+        thread.start();
     }
 
     public void sort(PlanetSystem.Sort sort) {

@@ -1,9 +1,6 @@
 package com.company.repository;
 
-import com.company.model.Moon;
-import com.company.model.Planet;
-import com.company.model.PlanetSystem;
-import com.company.model.ReadFile;
+import com.company.model.*;
 
 import java.util.ArrayList;
 
@@ -94,6 +91,31 @@ public class UniverseRepository implements IUniverseRepository {
             return aktuellPlanetSystem.getPlanet(planetId).getMoon(moonId);
 
         return null;
+    }
+
+    @Override
+    public void createPlanet(String systemName, Planet newPlanet) {
+        for (PlanetSystem planetSystem : planetSystems)
+            if (planetSystem.getName().equalsIgnoreCase(systemName))
+                planetSystem.addPlanetToSystem(newPlanet);
+    }
+
+    @Override
+    public void updatePlanet(String systemName, String planetName, Planet newPlanet) {
+        for (PlanetSystem planetSystem : planetSystems)
+            if (planetSystem.getName().equalsIgnoreCase(systemName))
+                planetSystem.getPlanet(planetName).setPropFromOtherPlanet(newPlanet);
+    }
+
+    @Override
+    public void deletePlanet(String systemName, String planetName) {
+        for (PlanetSystem planetSystem : planetSystems)
+            if (planetSystem.getName().equalsIgnoreCase(systemName))
+                planetSystem.removePlanetFromSystem(planetName);
+    }
+
+    public void save() {
+        SaveFile.saveFile(planetSystems);
     }
 
     @Override

@@ -66,6 +66,9 @@ public abstract class CelestialBody implements Comparable<CelestialBody> {      
     public void setMass(double mass) {
         this.mass = mass;
     }
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 
     public String getName() {
         return name;

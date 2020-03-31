@@ -23,6 +23,12 @@ public interface IUniverseRepository {
     Moon getMoon(String systemName, int planetId, String moonName);
     Moon getMoon(String systemName, int planetId, int moonId);
 
+    void createPlanet(String systemName, Planet newPlanet);
+    void updatePlanet(String systemName, String planetName, Planet newPlanet);
+    void deletePlanet(String systemName, String planetName);
+
+    void save();
+
     void sort(PlanetSystem.Sort sort);
 }
 /*

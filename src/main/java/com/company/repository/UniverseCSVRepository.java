@@ -6,12 +6,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class UniverseCSVRepository implements IUniverseCSVRepository {
+public class UniverseCSVRepository implements IUniverseRepository {
     public HashMap<Integer, PlanetSystem> planetSystems = new HashMap<>();
 
     public UniverseCSVRepository(String fileName) {
-        // Read CSV file here
-
         if (!fileName.matches(".+\\.csv"))  //Checks if there is .csv in the file name. if not then add.
             fileName += ".csv";
         fileName = "CSV-files/" + fileName;
@@ -91,8 +89,9 @@ public class UniverseCSVRepository implements IUniverseCSVRepository {
 
         return null;
     }
-    public HashMap<Integer, PlanetSystem> getAllPlanetSystem() {
-        return planetSystems;
+    public ArrayList<PlanetSystem> getAllPlanetSystem() {
+        List<PlanetSystem> list = new ArrayList<PlanetSystem>(planetSystems.values());
+        return (ArrayList<PlanetSystem>) list;
     }
 
     public Planet getPlanet(String systemName, String planetName) {
@@ -160,6 +159,31 @@ public class UniverseCSVRepository implements IUniverseCSVRepository {
             return aktuellPlanetSystem.getPlanet(planetId).getMoon(moonId);
 
         return null;
+    }
+
+    @Override
+    public void createPlanet(String systemName, Planet newPlanet) {
+        planetSystems.get(systemName).addPlanetToSystem(newPlanet);
+        save();
+    }
+
+    @Override
+    public void updatePlanet(String systemName, String planetName, Planet newPlanet) {
+        planetSystems.get(systemName).getPlanet(planetName).setPropFromOtherPlanet(newPlanet);
+        save();
+    }
+
+    @Override
+    public void deletePlanet(String systemName, String planetName) {
+        planetSystems.get(systemName).removePlanetFromSystem(planetName);
+        save();
+    }
+
+    public void save() {
+        Thread thread = new Thread( () -> {
+            SaveFile.saveFile(getAllPlanetSystem());
+        });
+        thread.start();
     }
 
     @Override
