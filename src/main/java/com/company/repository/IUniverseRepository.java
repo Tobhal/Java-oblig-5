@@ -1,5 +1,6 @@
 package com.company.repository;
 
+import com.company.model.CenterStar;
 import com.company.model.PlanetSystem;
 import com.company.model.Planet;
 import com.company.model.Moon;
@@ -11,6 +12,8 @@ public interface IUniverseRepository {
 
     ArrayList<PlanetSystem> getAllPlanetSystem();
     PlanetSystem getPlanetSystem(String planetSystemName);
+
+    CenterStar getCenterStar(String systemName);
 
     Planet getPlanet(String systemName, String planetName);
     Planet getPlanet(String systemName, int planetId);

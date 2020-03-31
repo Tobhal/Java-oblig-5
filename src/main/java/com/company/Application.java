@@ -30,12 +30,12 @@ public class Application {
         app.get("/api/planet-systems", planetController::getPlanetSystems);
         app.get("/api/planet-systems/:planet-system-id", planetController::getPlanetSystem);
 
-        app.get("/api/planet-systems/:planet-system-id/createPlanet", planetController::createPlanet);
+        app.post("/api/planet-systems/:planet-system-id/createPlanet", planetController::createPlanet);
         app.get("/api/planet-systems/:planet-system-id/planets", planetController::getPlanets);
         app.get("/api/planet-systems/:planet-system-id/planets/:planetName", planetController::getPlanet);
 
         app.get("/api/planet-systems/:planet-system-id/planets/:planetName/delete", planetController::deletePlanet);
-        app.get("/api/planet-systems/:planet-system-id/planets/:planetName/update", planetController::updatePlanet);
+        app.post("/api/planet-systems/:planet-system-id/planets/:planetName/update", planetController::updatePlanet);
 
         app.get("/api/planet-systems/:planet-system-id/planets/:planetName/moons", planetController::getMoons);
         app.get("/api/planet-systems/:planet-system-id/planets/:planetName/moons/:moonName", planetController::getMoon);

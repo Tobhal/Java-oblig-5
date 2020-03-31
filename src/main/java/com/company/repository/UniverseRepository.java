@@ -26,6 +26,11 @@ public class UniverseRepository implements IUniverseRepository {
         return new ArrayList<>();
     }
 
+    public CenterStar getCenterStar(String systemName) {
+        PlanetSystem aktuellPlanetSystem = getPlanetSystem(systemName);
+        return aktuellPlanetSystem.getCenterStar();
+    }
+
     public Planet getPlanet(String systemName, String planetName) {
         PlanetSystem aktuellPlanetSystem = getPlanetSystem(systemName);
 

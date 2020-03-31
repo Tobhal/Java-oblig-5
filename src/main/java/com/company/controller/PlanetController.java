@@ -55,17 +55,17 @@ public class PlanetController {
     }
 
     public void deletePlanet(Context context) {
+        System.out.println("Delete planet");
+
         String systemName = context.pathParam("planet-system-id");
         String planetName = context.pathParam("planetName");
 
         universeRepository.deletePlanet(systemName, planetName);
+
+        context.redirect("/planet-systems/" + systemName);
     }
     public void createPlanet(Context context) {
-        System.out.println("Start create planet");
-
         String systemName = context.pathParam("planet-system-id");
-
-        System.out.println("create planet variables");
 
         String name = context.formParam("name");
         double mass = Double.parseDouble(context.formParam("mass"));
@@ -73,21 +73,17 @@ public class PlanetController {
         double semiMajorAxis = Double.parseDouble(context.formParam("semiMajorAxis"));
         double eccentricity = Double.parseDouble(context.formParam("eccentricity"));
         double orbitalPeroid = Double.parseDouble(context.formParam("orbitalPeriod"));
-        String pictureUrl = context.formParam("pichureUrl");
-
-        System.out.println("Create planet object");
+        String pictureUrl = context.formParam("pictureUrl");
 
         Planet planet = new Planet(name, mass, radius, semiMajorAxis, eccentricity, orbitalPeroid);
         planet.setPictureUrl(pictureUrl);
-        planet.setCentralCelestialBody(universeRepository.getPlanet(systemName, name).getCentralCelestialBody());
+        planet.setCentralCelestialBody(universeRepository.getCenterStar(systemName));
 
-        System.out.println("Add planet to unicersRepository");
+        System.out.println(planet);
 
         universeRepository.createPlanet(systemName, planet);
 
-        System.out.println("Redirect");
-
-        context.redirect("/planet-systems/" + systemName + "/planets" + name);
+        context.redirect("/planet-systems/" + systemName + "/planets/" + name);
     }
     public void updatePlanet(Context context) {
         String systemName = context.pathParam("planet-system-id");
@@ -107,7 +103,7 @@ public class PlanetController {
 
         universeRepository.updatePlanet(systemName, planetName, planet);
 
-        context.redirect("/planet-systems/" + systemName + "/planets" + name);
+        context.redirect("/planet-systems/" + systemName + "/planets/" + name);
     }
 
     private void sortPlanetSystem(Context context) {

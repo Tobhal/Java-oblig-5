@@ -57,6 +57,7 @@ public class PlanetSystem{
 
     //Remove
     public void removePlanetFromSystem(String planetName) {
+        System.out.println("Remove planet from list: " + planetName);
         planetList.removeIf(planet -> planet.getName().equals(planetName));
     }
 

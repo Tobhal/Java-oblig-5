@@ -157,8 +157,8 @@ public abstract class NaturalSatellite extends CelestialBody {
     @Override
     public String toString() {
         return "Name: " + name + " | Mass: " + mass + " | Radius: " + radius  +
-                "Semi Maijor Axis: " + semiMajorAxis + " | Eccentricity: " + eccentricity + " | Orbital Period: " + orbitalPeriod +
-                "Orbering: " + centralCelestialBody.getName();
+                " | Semi Maijor Axis: " + semiMajorAxis + " | Eccentricity: " + eccentricity + " | Orbital Period: " + orbitalPeriod +
+                " | Orbering: " + centralCelestialBody.getName();
     }
 }
 
