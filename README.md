@@ -20,15 +20,15 @@ Oppgave 1 - Ord og begreper
 
 Lag deg en oversikt over hva følgende ord/begreper/teknologier betyr/er:
 
-    Exception
-    Tråd
-    Collections Framework
-        List
-        HashMap
-        Queue
-        Stack
+* Exception
+* Tråd
+* Collections Framework
+    * List
+    * HashMap
+    * Queue
+    * Stack
 
- Oppgave 2 - Kodesammenligning
+## Oppgave 2 - Kodesammenligning
 
 Sammenlign med løsningsforslaget fra oblig 4, Oblig4_ProposedSolution.zip. Ta for dere forrige oblig og forklar deres implementasjon. 
 
@@ -47,11 +47,11 @@ Vi skal ta for oss filskriving, og hente data herfra, samt kunne gjøre både Cr
 
 Oppdaterte vue-filer (merk, layout.html er ikke med her, og MÅ være med i prosjektet deres)
 
-Oppgave 2.1 - Fillesing og nytt JSON repository
+### Oppgave 2.1 - Fillesing og nytt JSON repository
 
 Vi skal nå kunne gjøre mer enn å bare lese data, vi ønsker derfor å lage og utvide repositoriet vårt.
 
-a - Repository)
+#### a - Repository)
 
 Lag et nytt repository kalt UniverseJSONRepository. I konstruktøren skal du kunne ta inn enten et filnavn, eller et File-objekt, og gjør noe lignende slik vi gjorde tidligere, med å lese disse dataene inn i en liste med PlanetSystems. Bruk Jackson eller et lignende bibliotek for å hjelpe til med lesingen av data.
 
@@ -61,12 +61,13 @@ planets_100.json - Inneholder 100 planeter
 
 planets_4000.json - Inneholder 4000 planeter
 
-b - Forberedelser)
+#### b - Forberedelser)
 
 Når JSON serialiserer og deserialiserer (gjør om fra Java-objekter til JSON og tilbake), så gjør den dette ved hjelp av noe som heter reflection (ser hvilke metoder som finnes, og benytter disse). I tilfellet hvor vi ønsker å lese en Planet, så inneholder denne en "CelestialBody". På grunn av arv, så kan denne for oss være en subklasse. Hvis dette er tilfelle må vi gi noe informasjon om at hvis dette er en stjerne, bruk Star-klassen.
 
 Med Jackson, kan man legge til annotering i CelestialBody. Legg til:
 
+``` java
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -74,19 +75,20 @@ Med Jackson, kan man legge til annotering i CelestialBody. Legg til:
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Star.class, name = "star")
 })
-public class CelestialBody implements Comparable<CelestialBody> 
+public class CelestialBody implements Comparable<CelestialBody>
+```
 
 I tillegg forutsetter også denne deserialiseringen at vi har tomme konstruktører i klassene vi skal benytte. Da denne benytter disse, for så å fylle opp objektet med data ved hjelp av set-metodene.
 
 Lag tomme konstruktører i alle model-klassene, verifiser også at det finnes get- og set-metoder for alle variabler som skal kunne leses og skrives.
 
-c - Implementasjon av interface)
+#### c - Implementasjon av interface)
 
 Implementere IUniverseRepository, og lag en implementasjon av alle metodene derfra.
 
 Benytt så dette repositoriet fremfor det gamle i Application.java. Hvorfor fungerer nå dette sammen med Controllerne våre, selv om vi har et helt nytt repository?
 
-d - Skriving)
+#### d - Skriving)
 
 Vi ønsker at endringer vi gjør i dataene i senere oppgaver blir lagret, og er der når vi starter applikasjonen på nytt. Vi skal derfor gjøre klart skriving av disse endringene til fil.
 
@@ -103,9 +105,9 @@ public double getSurfaceGravity()
 
  
 
-Oppgave 2.2 - Fillesing og nytt CSV repository
+### Oppgave 2.2 - Fillesing og nytt CSV repository
 
-a - Repository)
+#### a - Repository)
 
 Lag enda et nytt repository kalt UniverseCSVRepository. I konstruktøren skal du kunne ta inn enten et filnavn, eller et File-objekt. 
 
@@ -121,19 +123,19 @@ planets_100_with_column_descriptions.csv Forhåndsvis dokumentet- Inneholder 100
 
 planets_4000_with_column_descriptions.csvForhåndsvis dokumentet - Inneholder 4000 planeter, og kolonnebeskrivelser i starten av filen 
 
-b - Interface)
+#### b - Interface)
 
 Implementere IUniverseRepository, og lag en implementasjon av alle metodene derfra.
 
 Test så ut ved å bruke denne repositoriet i Application.java.
 
-c - Skriving)
+#### c - Skriving)
 
 Lag en metode som skriver all dataen til fil i CSV-format. Siden det er unødvendig komplisert og oppdatere enkelte områder i en fil er det OK å skrive hele filen på nytt.
 
-Oppgave 2.3 - Delete
+### Oppgave 2.3 - Delete
 
-a - Interface)
+#### a - Interface)
 
 Du skal utvide interfacet vi laget med følgende metoder:
 
@@ -143,11 +145,11 @@ Du skal utvide interfacet vi laget med følgende metoder:
 
 Tenk gjennom hvilke parametere du trenger som input for å kunne utføre de forskjellige handlingene. Du trenger ikke lage en implementasjon av disse metodene i repositoryene enda, men de må fortsatt overrides der slik at koden kompilerer (i.e. lage tomme metoder uten en ferdig implementasjon).
 
-b - Delete-metoden)
+#### b - Delete-metoden)
 
 Velg enten UniverseJSONRepository eller UniverseCSVRespository og implementer så denne metoden i dette repositoriet. Den skal slette en planet, og skrive data til fil (hvis du gjør dette til JSON, ta en titt til på oppgave 2.1d ifbm. @JsonIgnore).
 
-c - Delete - API - Controller)
+#### c - Delete - API - Controller)
 
 Oppdater controlleren til å ta imot en API-get request til:
 
@@ -155,19 +157,19 @@ Oppdater controlleren til å ta imot en API-get request til:
 
 Kall så den korrekte metoden i UniverseCSV/JSONRepository.
 
-Oppgave 2.4 - Create
+### Oppgave 2.4 - Create
 
-a - Create-metoden)
+#### a - Create-metoden)
 
 Velg enten UniverseJSONRepository eller UniverseCSVRespository og implementer så denne metoden i dette repositoriet. Den skal opprette en planet, og skrive data til fil.
 
-b - Koble opp views)
+#### b - Koble opp views)
 
 Kobl sammen planet-create vue med path'en:
 
     /planet-systems/:planet-system-id/createplanet
 
-c - Create - API - Controller)
+#### c - Create - API - Controller)
 
 Oppdater controlleren til å ta imot en API-post request til:
 
@@ -177,15 +179,15 @@ Hent ut data fra post-requesten, dette kan gjøres ved hjelp av formParam-metode
 
 Du skal til slutt redirectes tilbake til detaljvisningen for planetsystemet planeten er blitt lagt til i.
 
-Oppgave 2.5 - Update
+### Oppgave 2.5 - Update
 
-a - Update-metoden)
+#### a - Update-metoden)
 
 Implementer denne metoden i dette valgfritt repository. Den skal oppdatere en planet. Tenk gjennom hvordan du kan få oppdatert det faktiske planet-objektet som finnes i et PlanetSystem. Du står fritt til å utvide med metoder i modell-klassene hvis det skulle være behov for det.
 
 Endringene skal til slutt skrives til fil. Siden det er unødig komplisert og oppdatere spesifikke områder i en fil, så går det fint at hele innholdet i filen overskrives.
 
-b - Update - API - Controller)
+#### b - Update - API - Controller)
 
 Oppdater controlleren til å ta imot en API-post request til:
 
@@ -201,9 +203,9 @@ Lag en egen tråd for skrivingen til fil i UniverseCSVRepository/UniverseJSONRep
 
  
 
-Bonusoppgaver
+## Bonusoppgaver
 
-Oppgave 3.1 - Database
+### Oppgave 3.1 - Database
 
 Opprett en database med en fornuftig tabellstruktur. Gjør nødvendige endringer i .CSV-filene, (splitt opp til å matche tabellene), og importer dataene inn i databasen. 
 Lag et nytt database-repository - UniverseDBRepository. Implementer alle metodene fra IUniverseRepository og benytt denne i Application.java.
