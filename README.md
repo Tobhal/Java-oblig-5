@@ -139,9 +139,9 @@ Lag en metode som skriver all dataen til fil i CSV-format. Siden det er unødven
 
 Du skal utvide interfacet vi laget med følgende metoder:
 
-    Opprette en planet
-    Oppdatere en planet
-    Slette en planet
+* Opprette en planet
+* Oppdatere en planet
+* Slette en planet
 
 Tenk gjennom hvilke parametere du trenger som input for å kunne utføre de forskjellige handlingene. Du trenger ikke lage en implementasjon av disse metodene i repositoryene enda, men de må fortsatt overrides der slik at koden kompilerer (i.e. lage tomme metoder uten en ferdig implementasjon).
 
@@ -211,5 +211,3 @@ Opprett en database med en fornuftig tabellstruktur. Gjør nødvendige endringer
 Lag et nytt database-repository - UniverseDBRepository. Implementer alle metodene fra IUniverseRepository og benytt denne i Application.java.
 
 Hvis databasen er ekstern, sørg for å gjør den tilgjengelig slik at studentassistentene får testet den. Hvis den er lokal, legg med en kopi av databasen i innleveringen.
-
-....
